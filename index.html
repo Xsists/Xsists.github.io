@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>สมบัติแห่งอนุพันธ์</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🏴‍☠️ สมบัติแห่งอนุพันธ์</h1>
+    <input type="text" id="playerName" placeholder="ชื่อของคุณ" />
+    <button onclick="startGame()">เริ่มเกม</button>
+
+    <canvas id="board" width="500" height="500"></canvas>
+
+    <div id="gameArea" style="display:none;">
+      <button onclick="askQuestion()">ตอบโจทย์เพื่อทอยลูกเต๋า</button>
+      <p id="diceResult">ลูกเต๋า: -</p>
+    </div>
+  </div>
+
+  <!-- Modal คำถาม -->
+  <div id="questionModal" class="modal hidden">
+    <div class="modal-content">
+      <p id="questionText">โจทย์</p>
+      <div id="choiceContainer"></div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

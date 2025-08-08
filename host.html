@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Host Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ Host Login</h1>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">เข้าสู่ระบบ</button>
+
+    <div id="dashboard" style="display:none;">
+      <h2>📋 ผู้เล่นทั้งหมด</h2>
+      <ul id="playerList"></ul>
+
+      <h2>🗺️ ตารางผู้เล่น</h2>
+      <canvas id="hostBoard" width="500" height="500"></canvas>
+      <div id="legend"></div>
+
+      <h2>📜 Log การเล่น</h2>
+      <ul id="logList"></ul>
+
+      <h2>🛑 จัดการเกม</h2>
+      <button onclick="stopGame()">หยุดเกม</button>
+      <button onclick="resetGame()">รีเซตเกม</button>
+
+    </div>
+  </div>
+
+  <script src="host.js"></script>
+</body>
+</html>
