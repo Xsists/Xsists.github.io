@@ -1,0 +1,193 @@
+/* ---------- พื้นฐานธีมป่าล่าสมบัติ ---------- */
+:root{
+  --leaf:#2f7d4a;
+  --leaf-2:#3fa16b;
+  --gold:#f5c15b;
+  --gold-dark:#c5993f;
+  --wood:#5e3a21;
+  --cream:#fffbe6;
+  --glass: rgba(255,255,255,.14);
+  --glass-border: rgba(255,255,255,.35);
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+@font-face{
+  font-family: "Kanit";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Kanit");
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  font-family: "Kanit", system-ui, -apple-system, Segoe UI, sans-serif;
+  color:#122015;
+  background-image: url(assets/forest.png);
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  background-attachment: fixed;
+}
+body::before{
+  /* ไล่เงาที่ขอบเพื่อให้อ่านตัวอักษรง่ายขึ้น */
+  content:"";
+  position:fixed; inset:0;
+  background: radial-gradient(1200px 600px at 50% 20%, rgba(0,0,0,.0) 0%, rgba(0,0,0,.25) 70%),
+              linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.3));
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* ---------- โครงหน้า ---------- */
+.container{ max-width:1100px; margin:0 auto; padding:24px; }
+.header-title{
+  display:flex; align-items:center; gap:10px; justify-content:center;
+  color:#fff; text-shadow:0 3px 10px rgba(0,0,0,.45);
+  margin: 8px 0 18px;
+}
+.header-title h1{ margin:0; font-weight:800; letter-spacing:.5px; }
+
+.grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap:18px;
+}
+@media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
+/* ---------- การ์ด/กล่อง (glass card) ---------- */
+.glass-card{
+  background: var(--glass);
+  border:1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius:16px;
+  box-shadow: var(--shadow);
+  padding:18px;
+  color:#18301f;
+}
+.card-title{
+  display:flex; align-items:center; gap:8px;
+  margin:0 0 12px; color:#fff; font-weight:700;
+  text-shadow:0 3px 10px rgba(0,0,0,.4);
+}
+
+/* ---------- ปุ่ม/อินพุต ---------- */
+.btn{
+  appearance:none; cursor:pointer;
+  border:2px solid var(--gold-dark);
+  background: linear-gradient(180deg, var(--gold) 0%, #f6d985 100%);
+  color:#291601; font-weight:700;
+  padding:10px 14px; border-radius:12px;
+  transition: transform .05s ease, filter .2s ease;
+  box-shadow:0 4px 0 var(--gold-dark), 0 10px 20px rgba(0,0,0,.2);
+}
+.btn:hover{ filter:brightness(1.05); }
+.btn:active{ transform: translateY(2px); box-shadow:0 2px 0 var(--gold-dark), 0 6px 16px rgba(0,0,0,.25); }
+
+.input{
+  width:100%; max-width:260px;
+  background:#fff8d8; border:2px solid #b28a3c; color:#2a1a05;
+  padding:10px 12px; border-radius:12px; font-size:16px; outline:none;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,.06);
+}
+
+/* ---------- กล่องสถิติ/ข้อความ ---------- */
+.info-row{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;
+}
+@media (max-width:600px){ .info-row{ grid-template-columns:1fr; } }
+
+.stat-box{
+  background: rgba(255,255,255,.85);
+  border:2px solid #d2c295; border-radius:14px;
+  padding:12px 14px; min-height:56px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; color:#372409;
+}
+
+/* ---------- กระดาน ---------- */
+.board-card{ padding:16px; }
+.board-wrap{
+  background: #fffbe6;
+  border:4px solid #2a2019;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+canvas{
+  display:block; width:100%; height:auto; max-width:560px; margin:0 auto;
+}
+
+/* ---------- Legend / รายการ ---------- */
+ul{ list-style:none; margin:0; padding:0; }
+ul li{
+  padding:8px 10px; background: rgba(255,255,255,.85);
+  border:1px dashed #bba873; border-radius:10px; margin-bottom:8px;
+  color:#2a1b06;
+}
+
+#legend{
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; justify-content:center;
+}
+.legend-item{
+  font-size:14px; padding:6px 10px; border-radius:10px;
+  background: rgba(255,255,255,.9);
+  border:1px solid #c8b57d;
+}
+
+/* ---------- Modal คำถาม ---------- */
+.modal{
+  position: fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:999;
+  background: rgba(0,0,0,.55);
+}
+.modal.show{ display:flex; }
+.modal-content{
+  background:#fffef5; border:3px solid #c8b57d; border-radius:16px; padding:16px;
+  width:min(480px, 94vw); box-shadow: var(--shadow);
+  text-align:center;
+}
+.qimg{ max-width:100%; height:auto; display:block; border-radius:8px; margin-bottom:12px; }
+.choices-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.choice-btn{
+  padding:0; border:2px solid #b8a060; border-radius:12px; overflow:hidden;
+  background:#fff; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+.choice-btn img{ display:block; width:100%; height:auto; }
+
+/* ---------- ส่วน host ใช้ร่วมได้ ---------- */
+.section-title{
+  margin:0 0 10px; color:#fff; text-shadow:0 3px 10px rgba(0,0,0,.45);
+}
+
+/* กล่อง Log ภายในเครื่อง */
+.log-box{
+  background: rgba(255,255,255,.9);
+  border:2px solid #d2c295;
+  border-radius:14px;
+  padding:10px 12px;
+  /* สูงพอดี + เลื่อนอ่านได้ */
+  max-height: clamp(140px, 28vh, 260px);
+  overflow: auto;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.08);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.log-row{
+  padding:6px 6px;
+  border-bottom:1px dashed #d8c894;
+  color:#2a1b06;
+  white-space: pre-wrap;
+}
+.log-row:last-child{ border-bottom: none; }
+
+/* (ทางเลือก) แต่งสกอร์บาร์ */
+.log-box::-webkit-scrollbar{ width:10px; }
+.log-box::-webkit-scrollbar-thumb{
+  background:#d6c183; border-radius:10px; border:2px solid #f6edd0;
+}
+.log-box::-webkit-scrollbar-track{
+  background:#faf5d9; border-radius:10px;
+}
+
+#logList.log-box .log-row{ border-bottom: none; }
+#logList.log-box li{ list-style:none; padding:6px 6px; border-bottom:1px dashed #d8c894; }

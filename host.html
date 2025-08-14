@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Host Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="firebaseConfig.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header-title">
+      <h1>🛡️ Host Dashboard</h1>
+    </div>
+
+    <section class="glass-card" style="margin-bottom:14px;">
+      <h2 class="card-title">🔐 Host Login</h2>
+      <input type="text" id="username" class="input" placeholder="Username">
+      <input type="password" id="password" class="input" placeholder="Password">
+      <button class="btn" onclick="login()">เข้าสู่ระบบ</button>
+    </section>
+
+    <div id="dashboard" style="display:none;">
+      <div class="grid" style="margin-bottom:14px;">
+        <section class="glass-card">
+          <h2 class="card-title">📋 ผู้เล่นทั้งหมด</h2>
+          <ul id="playerList"></ul>
+        </section>
+
+        <section class="glass-card board-card">
+          <h2 class="card-title">🗺️ ตารางผู้เล่น</h2>
+          <div class="board-wrap">
+            <canvas id="hostBoard" width="500" height="500"></canvas>
+          </div>
+          <div id="legend" style="margin-top:10px;"></div>
+        </section>
+      </div>
+
+      <div class="grid">
+        <section class="glass-card">
+          <h2 class="card-title">📜 Log การเล่น</h2>
+          <ul id="logList" class="log-box"></ul>
+        </section>
+        <section class="glass-card">
+          <h2 class="card-title">🛑 จัดการเกม</h2>
+          <button class="btn" onclick="stopGame()">หยุดเกม</button>
+          <button class="btn" onclick="resetGame()">รีเซตเกม</button>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="host.js"></script>
+</body>
+</html>
